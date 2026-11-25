@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>myTeacher</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      margin: 0;
+      padding: 2.5rem;
+    }
+    .card {
+      max-width: 680px;
+      margin: 0 auto;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 1.75rem;
+    }
+    h1 { margin-top: 0; font-size: 1.6rem; }
+    .badge {
+      display: inline-block;
+      background: #16a34a;
+      color: #fff;
+      font-size: 0.85rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+    }
+    p { color: #cbd5e1; line-height: 1.5; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <span id="estado" class="badge">Comprobando servidor...</span>
+    <h1>myTeacher</h1>
+    <p>Paso 1 activo: servidor local en marcha y controlado desde la bandeja del sistema (System Tray).</p>
+    <p>En los siguientes pasos añadiremos transcripción con marcas de tiempo, búsqueda rápida por clase/minuto y generación de resúmenes, esquemas y mapas mentales.</p>
+  </div>
+  <script>
+    fetch("/health")
+      .then((r) => r.json())
+      .then((data) => {
+        const el = document.getElementById("estado");
+        if (data.status === "ok") {
+          el.textContent = "Servidor local activo";
+        }
+      })
+      .catch(() => {
+        const el = document.getElementById("estado");
+        el.textContent = "Sin conexión con el servidor";
+        el.style.background = "#dc2626";
+      });
+  </script>
+</body>
+</html>

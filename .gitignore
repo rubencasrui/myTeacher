@@ -1,0 +1,5 @@
+/datos/videos
+/logs
+/app/__pycache__
+bin/ffmpeg.exe
+/modelos
